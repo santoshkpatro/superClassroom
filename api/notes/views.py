@@ -2,6 +2,7 @@ from rest_framework import generics, permissions
 from rest_framework.exceptions import APIException
 from core.models import Note
 from api.mixins import ClassroomEnrolledLookupMixin
+from api.exceptions import PermissionDenied
 from .serializers import NoteSerializer
 
 
@@ -13,7 +14,7 @@ class NoteCreate(ClassroomEnrolledLookupMixin, generics.CreateAPIView):
     def perform_create(self, serializer):
         classroom = self.get_classroom()
         if not self.request.user.has_permission(classroom, 'teacher'):
-            raise APIException('Permission denied', 403)
+            raise PermissionDenied
         serializer.save(classroom=classroom)
 
 
@@ -36,8 +37,8 @@ class NoteDetail(ClassroomEnrolledLookupMixin, generics.RetrieveUpdateDestroyAPI
     def get_object(self):
         classroom = self.get_classroom()
         if not self.request.user.has_permission(classroom, 'teacher'):
-            raise APIException('Permission denied', 403)
+            raise PermissionDenied
         note = super().get_object()
         if note.classroom != classroom:
-            raise APIException('Permission denied', 403)
+            raise PermissionDenied
         return note

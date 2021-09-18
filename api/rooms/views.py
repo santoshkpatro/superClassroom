@@ -3,6 +3,7 @@ from rest_framework.exceptions import APIException
 from core.models import Room
 from api.mixins import ClassroomEnrolledLookupMixin
 from .serializers import RoomSerializer
+from api.exceptions import PermissionDenied
 
 
 class RoomCreate(ClassroomEnrolledLookupMixin, generics.CreateAPIView):
@@ -13,7 +14,7 @@ class RoomCreate(ClassroomEnrolledLookupMixin, generics.CreateAPIView):
     def perform_create(self, serializer):
         classroom = self.get_classroom()
         if not self.request.user.has_permission(classroom, 'teacher'):
-            raise APIException('Permission denied', 403)
+            raise PermissionDenied
         serializer.save(classroom=classroom)
 
 
@@ -36,8 +37,8 @@ class RoomDetail(ClassroomEnrolledLookupMixin, generics.RetrieveUpdateDestroyAPI
     def get_object(self):
         classroom = self.get_classroom()
         if not self.request.user.has_permission(classroom, 'teacher'):
-            raise APIException('Permission denied', 403)
+            raise PermissionDenied
         room = super().get_object()
         if room.classroom != classroom:
-            raise APIException('Permission denied', 403)
+            raise PermissionDenied
         return room

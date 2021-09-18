@@ -2,6 +2,7 @@ from rest_framework import generics, permissions
 from rest_framework.exceptions import APIException
 from core.models import Assignment
 from api.mixins import ClassroomEnrolledLookupMixin
+from api.exceptions import PermissionDenied
 from .serializers import AssignmentSerializer
 
 
@@ -13,7 +14,7 @@ class AssignmentCreate(ClassroomEnrolledLookupMixin, generics.CreateAPIView):
     def perform_create(self, serializer):
         classroom = self.get_classroom()
         if not self.request.user.has_permission(classroom, 'teacher'):
-            raise APIException('Permission denied', 403)
+            raise PermissionDenied
         serializer.save(classroom=classroom)
 
 
@@ -36,8 +37,8 @@ class AssignmentDetail(ClassroomEnrolledLookupMixin, generics.RetrieveUpdateDest
     def get_object(self):
         classroom = self.get_classroom()
         if not self.request.user.has_permission(classroom, 'teacher'):
-            raise APIException('Permission denied', 403)
+            raise PermissionDenied
         assign = super().get_object()
         if assign.classroom != classroom:
-            raise APIException('Permission denied', 403)
+            raise PermissionDenied
         return assign
