@@ -3,7 +3,10 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["classroom_id"],
+  created() {},
+};
 </script>
 
 <style>

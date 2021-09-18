@@ -3,7 +3,12 @@
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["classroom_id"],
+  created() {
+    console.log("Other properties of: ", this.classroom_id);
+  },
+};
 </script>
 
 <style>

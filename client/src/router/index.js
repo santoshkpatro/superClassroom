@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
 import Dashboard from "../views/Dashboard.vue";
+import ClassroomList from "../views/ClassroomList.vue";
 
 // Auth Components
 import Login from "../views/auth/Login.vue";
@@ -36,19 +37,26 @@ const routes = [
     component: Register,
   },
   {
+    path: "/classrooms",
+    name: "ClassroomList",
+    component: ClassroomList,
+  },
+  {
     path: "/dashboard",
     name: "Dashboard",
     component: Dashboard,
     meta: { requiresAuth: true },
     children: [
       {
-        path: "",
+        path: ":classroom_id",
         name: "Overview",
+        props: true,
         component: Overview,
       },
       {
-        path: "other",
+        path: ":classroom_id/other",
         name: "Other",
+        props: true,
         component: Other,
       },
     ],

@@ -4,7 +4,6 @@ import axios from "axios";
 export default createStore({
   state: {
     user: null,
-    selectedClassroom: null,
   },
   mutations: {
     SET_USER_DATA(state, userData) {
@@ -19,7 +18,7 @@ export default createStore({
       location.reload();
     },
     SET_CLASSROOM(state, classroom) {
-      state.classroom = classroom;
+      state.selectedClassroom = classroom;
     },
   },
   actions: {
@@ -41,17 +40,11 @@ export default createStore({
     logout({ commit }) {
       commit("CLEAR_USER_DATA");
     },
-    selectClassroom({ commit }, classroom) {
-      commit("SET_CLASSROOM", classroom);
-    },
   },
   modules: {},
   getters: {
     loggedIn(state) {
       return !!state.user;
-    },
-    classroom_id(state) {
-      return state.selectClassroom.id;
     },
   },
 });
