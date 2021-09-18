@@ -1,9 +1,9 @@
 <template>
-    <h1>Overview</h1>
+  <h1>Overview</h1>
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
 
 <style>

@@ -1,4 +1,4 @@
-# studentclient
+# client
 
 ## Project setup
 ```
