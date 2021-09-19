@@ -1,80 +1,88 @@
 <template>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
-        <img
-          src="https://bulma.io/images/bulma-logo.png"
-          width="112"
-          height="28"
-        />
-      </a>
-
-      <a
-        role="button"
-        class="navbar-burger"
-        aria-label="menu"
-        aria-expanded="false"
-        data-target="navbarBasicExample"
-      >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
-
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <a class="navbar-item">Home</a>
-
-        <a class="navbar-item">About</a>
-
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link"> More </a>
-
-          <div class="navbar-dropdown">
-            <a class="navbar-item"> About </a>
-            <a class="navbar-item"> Jobs </a>
-            <a class="navbar-item"> Contact </a>
-            <hr class="navbar-divider" />
-            <a class="navbar-item"> Report an issue </a>
-          </div>
-        </div>
-      </div>
-
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <router-link to="/auth/register" v-if="!loggedIn">
-              <a class="button is-primary">
-                <strong>Sign up</strong>
-              </a>
-            </router-link>
-            <router-link to="/auth/login" v-if="!loggedIn">
-              <a class="button is-light"> Log in </a>
-            </router-link>
-            <a class="button is-light" v-if="loggedIn" @click="logout">
-              Logout
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://bulma.io">
+                <img
+                    src="https://bulma.io/images/bulma-logo.png"
+                    width="112"
+                    height="28"
+                />
             </a>
-          </div>
+
+            <a
+                role="button"
+                class="navbar-burger"
+                aria-label="menu"
+                aria-expanded="false"
+                data-target="navbarBasicExample"
+            >
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
         </div>
-      </div>
-    </div>
-  </nav>
+
+        <div id="navbarBasicExample" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" to="/">Home</a>
+
+                <a class="navbar-item" to="/about">About</a>
+
+                <router-link class="navbar-item" to="/classrooms"
+                    >Classrooms</router-link
+                >
+
+                <div class="navbar-item has-dropdown is-hoverable">
+                    <a class="navbar-link"> More </a>
+
+                    <div class="navbar-dropdown">
+                        <a class="navbar-item"> About </a>
+                        <a class="navbar-item"> Jobs </a>
+                        <a class="navbar-item"> Contact </a>
+                        <hr class="navbar-divider" />
+                        <a class="navbar-item"> Report an issue </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="navbar-end">
+                <div class="navbar-item">
+                    <div class="buttons">
+                        <router-link to="/auth/register" v-if="!loggedIn">
+                            <a class="button is-primary">
+                                <strong>Sign up</strong>
+                            </a>
+                        </router-link>
+                        <router-link to="/auth/login" v-if="!loggedIn">
+                            <a class="button is-light"> Log in </a>
+                        </router-link>
+                        <a
+                            class="button is-light"
+                            v-if="loggedIn"
+                            @click="logout"
+                        >
+                            Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 </template>
 
 <script>
-import { authComputed } from "../store/helpers.js";
+import { authComputed } from '../store/helpers.js'
 
 export default {
-  computed: {
-    ...authComputed,
-  },
-  methods: {
-    logout() {
-      this.$store.dispatch("logout");
+    computed: {
+        ...authComputed,
     },
-  },
-};
+    methods: {
+        logout() {
+            this.$store.dispatch('logout')
+        },
+    },
+}
 </script>
 
 <style>

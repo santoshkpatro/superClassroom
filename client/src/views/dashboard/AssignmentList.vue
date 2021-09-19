@@ -1,30 +1,28 @@
 <template>
     <div>
-        <div class="box" v-for="room in rooms" :key="room.id">
-            Room - {{ room.title }}
-            <p>Schedule on - {{ room.schedule_on }}</p>
+        <div class="box" v-for="assignment in assignments" :key="assignment.id">
+            {{ assignment.title }}
         </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios'
-
 export default {
     props: ['classroom_id'],
     data() {
         return {
-            rooms: null,
+            assignments: null,
         }
     },
     created() {
         axios
-            .get(`${process.env.VUE_APP_API_URL}/api/rooms/list`, {
+            .get(`${process.env.VUE_APP_API_URL}/api/assignments/list`, {
                 params: {
                     classroom_id: this.classroom_id,
                 },
             })
-            .then(({ data }) => (this.rooms = data))
+            .then(({ data }) => (this.assignments = data))
             .catch((e) => console.log(e))
     },
 }
