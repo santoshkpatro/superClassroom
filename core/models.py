@@ -52,7 +52,7 @@ class Submission(models.Model):
         db_table = 'submissions'
 
     def __str__(self) -> str:
-        return self.assignment.title + ' submitted by ' + self.member.user.name
+        return self.assignment.title + ' submitted by ' + self.student.name
 
 
 class Note(models.Model):

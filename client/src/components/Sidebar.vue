@@ -35,6 +35,16 @@
                 <router-link
                     class="mx-5"
                     :to="{
+                        name: 'NoteList',
+                        params: { classroom_id: classroomId },
+                    }"
+                    >Notes</router-link
+                >
+            </li>
+            <li class="my-5">
+                <router-link
+                    class="mx-5"
+                    :to="{
                         name: 'Other',
                         params: { classroom_id: classroomId },
                     }"

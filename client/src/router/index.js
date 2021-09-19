@@ -12,6 +12,7 @@ import Overview from '../views/dashboard/Overview.vue'
 import Other from '../views/dashboard/Other.vue'
 import RoomList from '../views/dashboard/RoomList.vue'
 import AssignmentList from '../views/dashboard/AssignmentList.vue'
+import NoteList from '../views/dashboard/NoteList.vue'
 
 const routes = [
     {
@@ -72,6 +73,12 @@ const routes = [
                 name: 'AssignmentList',
                 props: true,
                 component: AssignmentList,
+            },
+            {
+                path: ':classroom_id/notes',
+                name: 'NoteList',
+                props: true,
+                component: NoteList,
             },
         ],
     },
