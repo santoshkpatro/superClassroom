@@ -31,7 +31,7 @@ export default createStore({
     },
     login({ commit }, credentials) {
       return axios
-        .post(`http://127.0.0.1:8000/api/auth/login/`, credentials)
+        .post(`${process.env.VUE_APP_API_URL}/api/auth/login/`, credentials)
         .then(({ data }) => {
           console.log(data);
           commit("SET_USER_DATA", data);

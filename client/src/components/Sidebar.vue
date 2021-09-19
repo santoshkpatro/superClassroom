@@ -8,7 +8,13 @@
           >Overview</router-link
         >
       </li>
-      <li class="my-5"><a class="mx-5">Rooms</a></li>
+      <li class="my-5">
+        <router-link
+          class="mx-5"
+          :to="{ name: 'RoomList', params: { classroom_id: classroomId } }"
+          >Rooms</router-link
+        >
+      </li>
       <li class="my-5">
         <router-link
           class="mx-5"

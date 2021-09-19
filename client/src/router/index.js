@@ -10,6 +10,7 @@ import Register from "../views/auth/Register.vue";
 // Dashboard Components
 import Overview from "../views/dashboard/Overview.vue";
 import Other from "../views/dashboard/Other.vue";
+import RoomList from "../views/dashboard/RoomList.vue";
 
 const routes = [
   {
@@ -58,6 +59,12 @@ const routes = [
         name: "Other",
         props: true,
         component: Other,
+      },
+      {
+        path: ":classroom_id/rooms",
+        name: "RoomList",
+        props: true,
+        component: RoomList,
       },
     ],
   },
