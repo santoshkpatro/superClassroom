@@ -30,7 +30,7 @@ class UserLoginSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['email', 'name', 'phone', 'profile_url', 'token']
+        fields = ['id', 'email', 'name', 'phone', 'profile_url', 'token']
 
     def get_token(self, obj):
         return str(AccessToken.for_user(obj))

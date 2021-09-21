@@ -13,6 +13,7 @@ import Other from '../views/dashboard/Other.vue'
 import RoomList from '../views/dashboard/RoomList.vue'
 import AssignmentList from '../views/dashboard/AssignmentList.vue'
 import NoteList from '../views/dashboard/NoteList.vue'
+import Chat from '../views/dashboard/Chat.vue'
 
 const routes = [
     {
@@ -79,6 +80,12 @@ const routes = [
                 name: 'NoteList',
                 props: true,
                 component: NoteList,
+            },
+            {
+                path: ':classroom_id/chat',
+                name: 'Chat',
+                props: true,
+                component: Chat,
             },
         ],
     },
