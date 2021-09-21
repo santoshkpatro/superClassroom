@@ -44,6 +44,7 @@ const routes = [
         path: '/classrooms',
         name: 'ClassroomList',
         component: ClassroomList,
+        meta: { requiresAuth: true },
     },
     {
         path: '/dashboard',
