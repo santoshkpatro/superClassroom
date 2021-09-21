@@ -10,4 +10,5 @@ urlpatterns = [
     path('api/rooms/', include('api.rooms.urls')),
     path('api/notes/', include('api.notes.urls')),
     path('api/assignments/', include('api.assignments.urls')),
+    path('api/chats/', include('api.chats.urls'))
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

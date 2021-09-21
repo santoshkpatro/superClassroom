@@ -2,13 +2,13 @@ import json
 from django.core.serializers.json import DjangoJSONEncoder
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
-from chats.models import Chat
-from chats.serializers import ChatSerializer
+from classrooms.models import Classroom
 from accounts.models import User
-from .models import Classroom
+from .models import Chat
+from .serializers import ChatSerializer
 
 
-class ChatConsumer(WebsocketConsumer):
+class ClassroomChatConsumer(WebsocketConsumer):
     def connect(self):
         self.room_name = self.scope['url_route']['kwargs']['classroom_id']
         self.room_group_name = 'chat_%s' % self.room_name
@@ -55,5 +55,4 @@ class ChatConsumer(WebsocketConsumer):
         serializer = ChatSerializer(chat)
 
         # Send message to WebSocket
-        print(serializer.data)
         self.send(text_data=json.dumps(serializer.data, cls=DjangoJSONEncoder))

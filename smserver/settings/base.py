@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'classrooms.apps.ClassroomsConfig',
     'core.apps.CoreConfig',
+    'chats.apps.ChatsConfig',
 ]
 
 MIDDLEWARE = [

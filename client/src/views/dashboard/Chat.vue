@@ -45,8 +45,8 @@
 </template>
 
 <script>
-import { v4 as uuidv4 } from 'uuid'
 import { mapGetters } from 'vuex'
+import axios from 'axios'
 
 export default {
     props: ['classroom_id'],
@@ -62,11 +62,19 @@ export default {
     },
     mounted() {
         this.connectRoom()
+        axios
+            .get(`${process.env.VUE_APP_API_URL}/api/chats/classrooms`, {
+                params: {
+                    classroom_id: this.classroom_id,
+                },
+            })
+            .then(({ data }) => (this.chats = data))
+            .catch((e) => console.log(e))
     },
     methods: {
         connectRoom() {
             this.chatSocket = new WebSocket(
-                `ws://localhost:8000/ws/classrooms/${this.classroom_id}/`
+                `ws://localhost:8000/ws/chats/classrooms/${this.classroom_id}/`
             )
 
             this.chatSocket.onmessage = this.receiveMessage
@@ -75,12 +83,9 @@ export default {
         sendMessage() {
             this.chatSocket.send(
                 JSON.stringify({
-                    id: uuidv4(),
                     message: this.msg,
-                    user: {
-                        id: this.getUser.id,
-                        name: this.getUser.name,
-                    },
+                    user_id: this.getUser.id,
+                    classroom_id: this.classroom_id,
                 })
             )
             this.msg = null
@@ -90,7 +95,6 @@ export default {
         },
         receiveMessage(e) {
             const data = JSON.parse(e.data)
-            // console.log(data)
             this.chats.push(data)
         },
     },
