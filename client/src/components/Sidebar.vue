@@ -45,10 +45,20 @@
                 <router-link
                     class="mx-5"
                     :to="{
+                        name: 'Chat',
+                        params: { classroom_id: classroomId },
+                    }"
+                    >Chat</router-link
+                >
+            </li>
+            <li class="my-5">
+                <router-link
+                    class="mx-5"
+                    :to="{
                         name: 'Other',
                         params: { classroom_id: classroomId },
                     }"
-                    >Orders</router-link
+                    >Other</router-link
                 >
             </li>
         </ul>
