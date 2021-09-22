@@ -5,6 +5,7 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 from django.core.asgi import get_asgi_application
 from django.urls import path
 from ws.classrooms.consumers import ClassroomChatConsumer
+from ws.middleware import TokenAuthMiddleware
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'smserver.settings.local')
 
