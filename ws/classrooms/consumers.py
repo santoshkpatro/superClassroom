@@ -2,6 +2,7 @@ import json
 from django.core.serializers.json import DjangoJSONEncoder
 from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
+from channels.auth import login
 from classrooms.models import Classroom
 from accounts.models import User
 from chats.models import Chat
