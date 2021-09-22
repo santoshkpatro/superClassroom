@@ -74,7 +74,7 @@ export default {
     methods: {
         connectRoom() {
             this.chatSocket = new WebSocket(
-                `ws://localhost:8000/ws/chats/classrooms/${this.classroom_id}/`
+                `${process.env.VUE_APP_WS_URL}/ws/chats/classrooms/${this.classroom_id}/`
             )
 
             this.chatSocket.onmessage = this.receiveMessage

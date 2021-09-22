@@ -4,8 +4,8 @@ from asgiref.sync import async_to_sync
 from channels.generic.websocket import WebsocketConsumer
 from classrooms.models import Classroom
 from accounts.models import User
-from .models import Chat
-from .serializers import ChatSerializer
+from chats.models import Chat
+from chats.serializers import ChatSerializer
 
 
 class ClassroomChatConsumer(WebsocketConsumer):
@@ -35,8 +35,15 @@ class ClassroomChatConsumer(WebsocketConsumer):
         user_id = text_data_json['user_id']
         classroom_id = text_data_json['classroom_id']
 
-        user = User.objects.get(id=user_id)
-        classroom = Classroom.objects.get(id=classroom_id)
+        try:
+            user = User.objects.get(id=user_id)
+        except User.DoesNotExist:
+            pass
+
+        try:
+            classroom = Classroom.objects.get(id=classroom_id)
+        except Classroom.DoesNotExist:
+            pass
 
         chat = Chat.objects.create(user=user, classroom=classroom, message=message)
 
