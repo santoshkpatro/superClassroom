@@ -1,7 +1,8 @@
-from django.db import models
+from django.db.models import Q
 from rest_framework import generics, permissions
 from classrooms.models import Classroom
-from .serializers import ClassroomSerializer
+from core.models import Room
+from .serializers import ClassroomSerializer, RoomSerializer
 from .permissions import IsAdminOrReadOnly
 
 
@@ -26,3 +27,19 @@ class ClassroomDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ClassroomSerializer
     queryset = Classroom.objects.all()
     permission_classes = [permissions.IsAuthenticated, IsAdminOrReadOnly]
+
+
+class ClassroomRoomList(generics.ListAPIView):
+    serializer_class = RoomSerializer
+    queryset = Room.objects.all()
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        classrooms = self.request.user.classrooms.all()
+        q = None
+        for classroom in classrooms:
+            if q is None:
+                q = classroom.rooms.all()
+            else:
+                q = q.union(classroom.rooms.all())
+        return q.order_by('schedule_on').reverse()
