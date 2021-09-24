@@ -39,6 +39,9 @@
                         >
                     </li>
                     <li class="nav-item" v-if="loggedIn">
+                        <a href="#" class="nav-link">Hi, {{ getUserName }}</a>
+                    </li>
+                    <li class="nav-item" v-if="loggedIn">
                         <button
                             class="btn btn-sm btn-secondary mx-2"
                             @click="handleLogout"
@@ -58,7 +61,7 @@ import { mapGetters } from 'vuex'
 export default {
     name: 'Navbar',
     computed: {
-        ...mapGetters(['loggedIn']),
+        ...mapGetters(['loggedIn', 'getUserName']),
     },
     methods: {
         handleLogout() {

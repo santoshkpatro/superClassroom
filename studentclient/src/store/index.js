@@ -51,5 +51,8 @@ export default createStore({
         getUser(state) {
             return state.user
         },
+        getUserName(state) {
+            return state.user.name
+        },
     },
 })
