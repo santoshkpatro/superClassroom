@@ -43,7 +43,7 @@
                     </li>
                     <li class="nav-item" v-if="loggedIn">
                         <button
-                            class="btn btn-sm btn-secondary mx-2"
+                            class="btn btn-sm btn-secondary mx-2 mt-1"
                             @click="handleLogout"
                         >
                             Logout

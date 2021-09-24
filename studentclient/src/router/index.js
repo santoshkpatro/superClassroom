@@ -17,15 +17,45 @@ const routes = [
             import(/* webpackChunkName: "about" */ '../views/About.vue'),
     },
     {
+        path: '/auth/login',
+        name: 'Login',
+        component: () => import('../views/auth/Login.vue'),
+    },
+    {
         path: '/classrooms',
         name: 'Classrooms',
         meta: { requiresAuth: true },
         component: () => import('../views/Classrooms.vue'),
     },
     {
-        path: '/auth/login',
-        name: 'Login',
-        component: () => import('../views/auth/Login.vue'),
+        path: '/classrooms/detail',
+        name: 'Detail',
+        props: true,
+        meta: { requiresAuth: true },
+        component: () => import('../views/Detail.vue'),
+        children: [
+            {
+                path: ':classroom_id/',
+                name: 'Overview',
+                props: true,
+                meta: { requiresAuth: true },
+                component: () => import('../views/Overview.vue'),
+            },
+            {
+                path: ':classroom_id/rooms',
+                name: 'Rooms',
+                props: true,
+                meta: { requiresAuth: true },
+                component: () => import('../views/Rooms.vue'),
+            },
+            {
+                path: ':classroom_id/discussion',
+                name: 'Discussion',
+                props: true,
+                meta: { requiresAuth: true },
+                component: () => import('../views/Discussion.vue'),
+            },
+        ],
     },
 ]
 

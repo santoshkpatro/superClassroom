@@ -4,7 +4,35 @@
             <Loader />
         </div>
         <div v-else>
-            <h1>Fetch Complete</h1>
+            <div class="row">
+                <div
+                    class="col-6 card"
+                    v-for="classroom in classrooms"
+                    :key="classroom.id"
+                >
+                    <img
+                        src="https://avatars.dicebear.com/api/identicon/random.svg"
+                        class="card-img-top"
+                        alt="#"
+                        height="200"
+                        width="200"
+                    />
+                    <div class="card-body">
+                        <h5 class="card-title">{{ classroom.name }}</h5>
+                        <p class="card-text">
+                            {{ classroom.description }}
+                        </p>
+                        <router-link
+                            :to="{
+                                name: 'Overview',
+                                params: { classroom_id: classroom.id },
+                            }"
+                            class="btn btn-primary"
+                            >Check Details</router-link
+                        >
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
